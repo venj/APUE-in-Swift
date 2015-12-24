@@ -10,7 +10,7 @@ So this repo is my attempt to go through the book using Swift.
 Platform
 ========
 
-Code examples uses standard alone Swift source code, Xcode command line project template or sometimes Xcode Playground, but I will add Linux support later, wherever possible.
+Code examples may be stand-alone Swift file, Swift Package Manager project, Xcode command line project or sometimes Xcode Playground. If any of the example is not Linux compatible, it would be, soon.
 
 License
 =======
