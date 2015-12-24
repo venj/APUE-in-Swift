@@ -11,8 +11,6 @@ import Glibc
 import Darwin
 #endif
 
-import Foundation
-
 func ls() {
     let arguments = Process.arguments
 
@@ -24,7 +22,8 @@ func ls() {
     let directory = arguments[1]
     let dp = opendir(directory)
     if dp == nil {
-        print("can not open \(directory)")
+        let errorMessage = String.fromCString(strerror(errno)) ?? "Unknown error"
+        print("can not open \(directory): \(errorMessage)")
         exit(255)
     }
 
