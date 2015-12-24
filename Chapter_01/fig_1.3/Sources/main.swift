@@ -33,15 +33,15 @@ func ls() {
         if dirp == nil {
             break
         }
-        //TODO: dirent structure's d_name member is imported as a Tuple with
-        //       1024 members! Why not import it as UnsafePointer<CChar>?
-        //
-        //      I don't know how to convert it to a String yet. So leave the
-        //      problem here.
-        //
-        //print(dirp.memory.d_name)
+        // FIXME: Magic! Just leave a mark here.
+        // Code copied from swift-package-manager/Sources/sys/walk.swift
+        var dirName = dirp.memory.d_name
+        let name = withUnsafePointer(&dirName) { (ptr) -> String in
+            return String.fromCString(UnsafePointer<CChar>(ptr)) ?? ""
+        }
+        print(name)
     }
-    
+
     closedir(dp)
     exit(0)
 }
