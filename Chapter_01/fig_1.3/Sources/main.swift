@@ -22,8 +22,7 @@ func ls() {
     let directory = arguments[1]
     let dp = opendir(directory)
     if dp == nil {
-        let errorMessage = String.fromCString(strerror(errno)) ?? "Unknown error"
-        print("can not open \(directory): \(errorMessage)")
+        print("can not open \(directory): \(errorMessage(errno))")
         exit(255)
     }
 
