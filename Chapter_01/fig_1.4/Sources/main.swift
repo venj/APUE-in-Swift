@@ -19,11 +19,11 @@ func io_test() {
 		let n = read(STDIN_FILENO, buf, buffSize)
 		if n == 0 { break }
 		if n < 0 {
-			print("I/O error: \(errorMessage(errno))")
+			print("Read error: \(errorMessage(errno))")
 			break
 		}
 		if write(STDOUT_FILENO, buf, n) != n {
-			print("I/O error: \(errorMessage(errno))")
+			print("Write error: \(errorMessage(errno))")
 		}
 	}
 	exit(0)
