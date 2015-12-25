@@ -26,7 +26,7 @@ func ls() {
         exit(255)
     }
 
-    while (true) {
+    while true {
         let dirp = readdir(dp)
         if dirp == nil {
             break

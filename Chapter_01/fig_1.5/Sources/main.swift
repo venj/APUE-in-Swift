@@ -12,7 +12,7 @@ import Darwin
 #endif
 
 func stdio_test() {
-	while(true) {
+	while true {
 		let c = getc(stdin)
 		if c == EOF { break }
 		if putc(c, stdout) == EOF {

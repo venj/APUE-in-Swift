@@ -14,8 +14,8 @@ import Darwin
 func io_test() {
 	let buffSize = 4096
 	let buf = UnsafeMutablePointer<CChar>.alloc(buffSize)
-
-	while(true) {
+	defer { if buf != nil { free(buf) } }
+	while true {
 		let n = read(STDIN_FILENO, buf, buffSize)
 		if n == 0 { break }
 		if n < 0 {
