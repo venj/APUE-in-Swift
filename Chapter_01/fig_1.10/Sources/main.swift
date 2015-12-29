@@ -22,7 +22,7 @@ this example. At last, it works, but with much limitation and bug. I will improv
 
 */
 
-
+#if !os(Linux)
 // Better signal handling from: http://pastebin.com/UQKHLtSu
 enum Signal: Int32 {
     case HUP    = 1
@@ -45,6 +45,8 @@ func trap(signal: Signal, action: @convention(c) Int32 -> ()) {
         sigaction(signal.rawValue, actionPointer, nil)
     }
 }
+
+#endif
 
 // <--------- Start of code copied from Swift Package Manager
 private func _getenv(key: String) -> String? {
@@ -148,23 +150,24 @@ func tiny_shell() {
         print("interrupted.")
     }
 
-    /* APUE solution
+    #if os(Linux)
 
     signal(SIGINT) { _ in 
         print("interrupted.")
         exit(0)
     } 
-
+    
     // Not able to catch SIG_ERR in Swift, for now
     // if (signal(...) == SIG_ERR) { print("signal error.") } 
     // SIG_ERR
     
-    */ 
-
+    #else
     // Better signal handling
     trap(.INT) { signal in
         print("intercepted signal \(signal)")
     }
+
+    #endif
 
     print("% ", terminator:"")
     while fgets(buff, Int32(buffSize), stdin) != nil {
